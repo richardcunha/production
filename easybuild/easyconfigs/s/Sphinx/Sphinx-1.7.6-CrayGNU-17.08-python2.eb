@@ -1,0 +1,34 @@
+# Contributed by Luca Marsella (CSCS)
+easyblock = 'PythonPackage'
+
+name = 'Sphinx'
+version = '1.7.6'
+py_maj_ver = '2'
+py_min_ver = '7'
+py_rev_ver = '13.1'
+pyver = '%s.%s' % (py_maj_ver, py_min_ver)
+versionsuffix = 'python%s' % py_maj_ver
+
+homepage = 'https://pypi.org/project/Sphinx'
+description = """Sphinx creates intelligent and beautiful documentation for Python projects"""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+
+source_urls = ['https://files.pythonhosted.org/packages/eb/3c/702e89ad33529c0107d44ebc1a7eca97c4fd77ae2784060923a65864fcbd']
+sources = ['Sphinx-1.7.6.tar.gz']
+
+python = 'Python'
+python_version = '2.7.13'
+
+toolchainopts = {'pic': True, 'verbose' : False }
+
+dependencies = [
+    ('cray-python/%s.%s' % (pyver, py_rev_ver), EXTERNAL_MODULE),
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%s/site-packages' % pyver]
+}
+
+moduleclass = 'tools'

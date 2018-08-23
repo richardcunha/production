@@ -1,0 +1,37 @@
+# Contributed by Luca Marsella (CSCS)
+easyblock = 'CMakeMake'
+
+name = 'Brion'
+version = "3.0.0"
+
+homepage = 'https://github.com/BlueBrain/Brion'
+description = """Brion is a C++ project for read and write access to Blue Brain data structures.
+"""
+
+toolchain = {'name': 'CrayGNU', 'version': '17.08'}
+
+# create your own tarball from github repository of the project (releases in git archive are not complete):
+# git clone --recursive https://github.com/BlueBrain/Brion
+sources = [SOURCE_TAR_GZ]
+
+builddependencies = [
+    ('CMake', '3.11.4', '', True) 
+]
+
+dependencies = [
+    ('Boost', '1.65.0', '-python3'),
+    ('cray-hdf5/1.10.0.3', EXTERNAL_MODULE),
+    ('Sphinx', '1.7.7', '-python3')
+]
+
+configopts = ' -DCLONE_SUBPROJECTS=ON -DCMAKE_BUILD_TYPE=Release '
+
+# a single make process is required, since parallel builds fail
+#maxparallel = 1
+
+sanity_check_paths = {
+    'files': ['lib/libBrion.%s' % SHLIB_EXT ],
+    'dirs': ['bin','lib'],
+}
+
+moduleclass = 'devel'
